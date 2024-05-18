@@ -1,10 +1,32 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
-class personaje
+#include <QObject>
+#include <QGraphicsPixmapItem>
+#include "sprites.h"
+
+#define blas_pixel_x_size 35
+#define blas_pixel_y_size 40
+#define blas_speed 8
+
+class personaje : public QObject, public QGraphicsPixmapItem
 {
 public:
-    personaje();
+    personaje(unsigned int scale);
+    void set_keys(unsigned int *keys);
+    void move(unsigned int key, bool is_valid);
+    ~personaje();
+
+private:
+    QRect set_complete_sprites();
+    void set_animations();
+    void set_left_animation();
+    void set_right_animation();
+    void set_down_animation();
+    void set_death_animation();
+
+    sprites *pixmap_management;
+    unsigned int keys[4];
 };
 
 #endif // PERSONAJE_H

@@ -1,32 +1,42 @@
 #include "sprites.h"
 
-sprites::sprites(QObject *parent)
+sprites::sprites(QString main_pixmap, unsigned int scale)
 {
-    timer = new QTimer();
-    filas = 0;
-    columnas=0;
-    pixmap = new QPixmap(":/personaje.png");
-    connect(timer,&QTimer::timeout, this, &sprites::actualizacion);
-    timer -> star(250)
+    this->main_pixmap = new QPixmap;
+    character_pixmap = new QPixmap;
+    this->main_pixmap->load(main_pixmap);
+    animation_counter = 0;
+    this->scale = scale;
 }
 
-void sprites::actualizacion()
+void sprites::set_design_size(unsigned int x, unsigned int y)
 {
-    columnas += 35;
-    if (columnas >= 280){
-        columnas=0;
-
-    }
-    this -> update(-ancho/2,-alto/2, ancho, alto);
-}
-QRectF sprites::boundingRect() const
-{
-    return QRectF(-ancho/2,-alto/2, ancho, alto);
+    height = y;
+    width = x;
 }
 
-void sprites::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void sprites::cut_character_pixmap(QRect size)
 {
-    painter -> drawPixmap(-ancho/2,-alto/2, *pixmap, columnas,0,ancho, alto);
+    *character_pixmap = main_pixmap->copy(size);
 }
 
+void sprites::add_new_animation(QRect size,unsigned int number)
+{
+    animations.push_back(size);
+    animations_size.push_back(number);
+}
+
+
+QPixmap sprites::get_current_pixmap(unsigned int animation)
+{
+    animation_counter++;
+    if(animation_counter>=animations_size[animation]) animation_counter = 0;
+
+    return character_pixmap->copy(animations[animation]).copy(animation_counter*width,0,width,height).scaled(width*scale,height*scale);
+}
+
+QPixmap sprites::get_fixed_image(QRect size)
+{
+    return character_pixmap->copy(size).scaled(width*scale,height*scale);
+}
 
