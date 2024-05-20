@@ -100,7 +100,7 @@ void personaje::set_down_animation()
     dim.setHeight(1*blas_pixel_y_size);
     dim.setWidth(4*blas_pixel_x_size);
 
-    pixmap_management->add_new_animation(dim,3);
+    pixmap_management->add_new_animation(dim,2);
 }
 
 void personaje::set_death_animation()

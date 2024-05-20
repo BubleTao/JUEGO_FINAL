@@ -15,8 +15,9 @@
 
 #include "personaje.h"
 #include "escenario.h"
+#include "disparo.h"
 
-#define game_scale_factor 2
+#define game_scale_factor 1
 #define game_map_rows 13
 #define game_map_col 31
 #define game_map_size_col 16
@@ -30,6 +31,7 @@ public:
     void key_event(QKeyEvent *event);
 
 public slots:
+    void disparar();
 
 
 private:
@@ -42,6 +44,7 @@ private:
     escenario *blocks[game_map_rows][game_map_col];
     unsigned int blas_keys[4];
     float difficult = 0.2;
+    Disparo *proyectil; // Objeto de la clase Disparo
 
     void set_blas_keys();
     void generate_map();
@@ -52,7 +55,6 @@ private:
     bool right_movement_is_valid(QGraphicsPixmapItem *item);
     bool up_movement_is_valid(QGraphicsPixmapItem *item);
     bool down_movement_is_valid(QGraphicsPixmapItem *item);
-    void set_focus_element(QGraphicsPixmapItem *item, unsigned int scalex, unsigned int scaley);
     QBrush set_rgb_color(int r, int g, int b, int a = 255);
 
 };

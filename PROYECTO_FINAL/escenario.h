@@ -5,8 +5,8 @@
 #include <QGraphicsPixmapItem>
 #include "sprites.h"
 
-#define blocks_pixel_x_size 16
-#define blocks_pixel_y_size 16
+#define blocks_pixel_x_size 35
+#define blocks_pixel_y_size 40
 
 class escenario : public QObject, public QGraphicsPixmapItem
 {
