@@ -9,6 +9,7 @@ reglas_juego::reglas_juego(QGraphicsView *graph, QVector<QLabel *> game_labels)
     setup_scene();
     setup_blas();
     generate_map();
+    setup_enemigo();
 
 
 }
@@ -152,4 +153,9 @@ QBrush reglas_juego::set_rgb_color(int r, int g, int b, int a)
     return color;
 }
 
-
+void reglas_juego::setup_enemigo()
+{
+    enemigo *enemigo_sprite = new enemigo(game_scale_factor);
+    enemigo_sprite->setPos(150, 0);
+    scene->addItem(enemigo_sprite);
+}
