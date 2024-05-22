@@ -3,7 +3,7 @@
 escenario::escenario(unsigned int scale, unsigned int type)
 {
     this->scale = scale;
-    pixmap = new sprites(":/imagenes/muralla.png",scale);
+    pixmap = new sprites(":/sprites.png",scale);
     pixmap->cut_character_pixmap(set_complete_sprites());
     pixmap->set_design_size(blocks_pixel_x_size,
                             blocks_pixel_y_size);
@@ -41,7 +41,7 @@ QRect escenario::set_non_destructible_block()
     dim.setX(0);
     dim.setY(0);
     dim.setHeight(1*blocks_pixel_y_size);
-    dim.setWidth(1*blocks_pixel_x_size);
+    dim.setWidth(4*blocks_pixel_x_size);
 
     return dim;
 }

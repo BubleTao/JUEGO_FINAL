@@ -45,7 +45,7 @@ void reglas_juego::generate_map()
         blocks[start_row][col] = new escenario(2, 1);
 
         blocks[start_row][col]->setX(2 * blocks_pixel_x_size * col);
-        blocks[start_row][col]->setY(2 * blocks_pixel_y_size * start_row);
+        blocks[start_row][col]->setY(274 + blocks_pixel_y_size * start_row);
         scene->addItem(blocks[start_row][col]);
     }
 }
@@ -155,7 +155,8 @@ QBrush reglas_juego::set_rgb_color(int r, int g, int b, int a)
 
 void reglas_juego::setup_enemigo()
 {
-    enemigo *enemigo_sprite = new enemigo(game_scale_factor);
-    enemigo_sprite->setPos(150, 0);
-    scene->addItem(enemigo_sprite);
+    enemigo2 = new enemigo(game_scale_factor);
+    enemigo2 -> setPos(150, 150);
+    scene->addItem(enemigo2);
 }
+

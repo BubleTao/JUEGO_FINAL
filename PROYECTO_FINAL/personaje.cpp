@@ -52,7 +52,7 @@ QRect personaje::set_complete_sprites()
 
     dim.setX(0);
     dim.setY(0);
-    dim.setHeight(3*blas_pixel_y_size);
+    dim.setHeight(1*blas_pixel_y_size);
     dim.setWidth(7*blas_pixel_x_size);
 
     return dim;

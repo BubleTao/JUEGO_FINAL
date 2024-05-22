@@ -42,6 +42,7 @@ private:
     QVector<QLabel *> labels;
     QGraphicsScene *scene;
     personaje *blas;
+    enemigo *enemigo2;
     escenario *blocks[game_map_rows][game_map_col];
     unsigned int blas_keys[4];
     float difficult = 0.2;
