@@ -1,5 +1,6 @@
 #include "reglas_juego.h"
 #include <chrono>
+#include <QDebug>
 
 reglas_juego::reglas_juego(QGraphicsView *graph, QVector<QLabel *> game_labels)
 {
@@ -27,15 +28,23 @@ void reglas_juego::key_event(QKeyEvent *event)
     if(unsigned(event->key()) == blas_keys[0]);
     else if(unsigned(event->key()) == blas_keys[1]);
     else if(unsigned(event->key()) == blas_keys[2]) is_valid = down_movement_is_valid(blas);
+    else if(unsigned(event->key()) == blas_keys[4]){
+    //creamos la bala
+    Disparo *nuevo_disparo = new Disparo();
+    //qDebug()<<"Bala creada";
+    nuevo_disparo->setPos(blas->x(), blas->y());
+    scene->addItem(nuevo_disparo);
+    }
     if(blas->x()<700 && blas->x()>230);
     blas->move(event->key(),is_valid);
-
 }
+
 void reglas_juego::set_blas_keys()
 {
     blas_keys[0] = Qt::Key_A;
     blas_keys[1] = Qt::Key_D;
     blas_keys[2] = Qt::Key_S;
+    blas_keys[4] = Qt::Key_Space;
 }
 
 void reglas_juego::generate_map()
