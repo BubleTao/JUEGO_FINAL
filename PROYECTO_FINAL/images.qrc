@@ -8,9 +8,7 @@
         <file>imagenes/muerte_enemigos.png</file>
         <file>imagenes/personaje.png</file>
         <file>imagenes/muralla.png</file>
-        <file>imagenes/nivel1.png</file>
-        <file>imagenes/nivel2.png</file>
-        <file>imagenes/nivelfinal.png</file>
         <file>imagenes/disparo.png</file>
+        <file>imagenes/fondo1.png</file>
     </qresource>
 </RCC>

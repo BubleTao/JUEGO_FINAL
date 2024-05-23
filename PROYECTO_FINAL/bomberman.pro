@@ -14,6 +14,7 @@ SOURCES += \
     escenario.cpp \
     fisicas.cpp \
     main.cpp \
+    muerte.cpp \
     personaje.cpp \
     reglas_juego.cpp \
     sprites.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     enemigos.h \
     escenario.h \
     fisicas.h \
+    muerte.h \
     personaje.h \
     reglas_juego.h \
     sprites.h \

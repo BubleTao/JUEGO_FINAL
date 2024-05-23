@@ -1,6 +1,6 @@
 #include "sprites.h"
 
-sprites::sprites(QString main_pixmap, unsigned int scale)
+sprites::sprites(QString main_pixmap,float scale)
 {
     this->main_pixmap = new QPixmap;
     character_pixmap = new QPixmap;

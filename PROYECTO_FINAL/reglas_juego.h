@@ -12,11 +12,12 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QApplication>
+#include <QTimer>
 
 #include "personaje.h"
 #include "escenario.h"
 #include "disparo.h"
-#include "enemigo.h"
+#include "enemigos.h"
 
 #define game_scale_factor 1
 #define game_map_rows 13
@@ -43,22 +44,19 @@ private:
     QGraphicsScene *scene;
     personaje *blas;
     enemigo *enemigo2;
-    escenario *blocks[game_map_rows][game_map_col];
+    escenario *muralla;
     unsigned int blas_keys[4];
     float difficult = 0.2;
-    Disparo *proyectil; // Objeto de la clase Disparo
+    Disparo *nuevo_disparo; // Objeto de la clase Disparo
 
     void set_blas_keys();
     void generate_map();
     void setup_scene();
     void setup_enemigo();
     void setup_blas();
-    bool bernoulli_event();
-    bool left_movement_is_valid(QGraphicsPixmapItem *item);
-    bool right_movement_is_valid(QGraphicsPixmapItem *item);
-    bool up_movement_is_valid(QGraphicsPixmapItem *item);
     bool down_movement_is_valid(QGraphicsPixmapItem *item);
     QBrush set_rgb_color(int r, int g, int b, int a = 255);
+    void start_parabolic();
 
 };
 

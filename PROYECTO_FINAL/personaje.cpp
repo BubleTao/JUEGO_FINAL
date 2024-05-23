@@ -12,7 +12,7 @@ personaje::personaje(unsigned int scale)
     set_animations();
     setX(1*blas_pixel_y_size*scale);
     setY(1*blas_pixel_x_size*scale);
-    setPixmap(pixmap_management->get_current_pixmap(3));
+    setPixmap(pixmap_management->get_current_pixmap(0));
 }
 
 void personaje::set_keys(unsigned int *keys)
@@ -27,18 +27,13 @@ void personaje::move(unsigned int key, bool is_valid)
         if(is_valid) setX(x()-blas_speed);
     }
     else if(key == keys[1]){
-        setPixmap(pixmap_management->get_current_pixmap(1));
+        setPixmap(pixmap_management->get_current_pixmap(0));
         if(is_valid) setX(x()+blas_speed);
     }
     else if(key == keys[2]){
-        setPixmap(pixmap_management->get_current_pixmap(2));
-        if(is_valid) setY(y()-blas_speed);
+        setPixmap(pixmap_management->get_current_pixmap(0));
+        if(is_valid);
     }
-    else if(key == keys[3]){
-        setPixmap(pixmap_management->get_current_pixmap(3));
-        if(is_valid) setY(y()+blas_speed);
-    }
-
 }
 
 personaje::~personaje()
@@ -53,41 +48,14 @@ QRect personaje::set_complete_sprites()
     dim.setX(0);
     dim.setY(0);
     dim.setHeight(1*blas_pixel_y_size);
-    dim.setWidth(7*blas_pixel_x_size);
+    dim.setWidth(4*blas_pixel_x_size);
 
     return dim;
 }
 
 void personaje::set_animations()
 {
-    set_left_animation();
-    set_right_animation();
     set_down_animation();
-    set_death_animation();
-}
-
-void personaje::set_left_animation()
-{
-    QRect dim;
-
-    dim.setX(0);
-    dim.setY(0);
-    dim.setHeight(1*blas_pixel_y_size);
-    dim.setWidth(1*blas_pixel_x_size);
-
-    pixmap_management->add_new_animation(dim,3);
-}
-
-void personaje::set_right_animation()
-{
-    QRect dim;
-
-    dim.setX(0);
-    dim.setY(0);
-    dim.setHeight(1*blas_pixel_y_size);
-    dim.setWidth(1*blas_pixel_x_size);
-
-    pixmap_management->add_new_animation(dim,3);
 }
 
 
@@ -103,14 +71,4 @@ void personaje::set_down_animation()
     pixmap_management->add_new_animation(dim,2);
 }
 
-void personaje::set_death_animation()
-{
-    QRect dim;
 
-    dim.setX(2*blas_pixel_x_size);
-    dim.setY(0);
-    dim.setHeight(1*blas_pixel_y_size);
-    dim.setWidth(4*blas_pixel_x_size);
-
-    pixmap_management->add_new_animation(dim,3);
-}
