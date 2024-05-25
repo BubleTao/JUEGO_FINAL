@@ -16,7 +16,7 @@ class ventanas : public QMainWindow
 public:
     ventanas(QWidget *parent = nullptr);
     ~ventanas();
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     Ui::ventanas *ui;

@@ -41,5 +41,3 @@ QRect escenario::set_non_destructible_block()
 
     return dim;
 }
-
-

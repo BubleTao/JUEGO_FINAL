@@ -11,8 +11,6 @@ reglas_juego::reglas_juego(QGraphicsView *graph, QVector<QLabel *> game_labels)
     setup_enemigo();
     generate_map();
     setup_blas();
-
-
 }
 
 reglas_juego::~reglas_juego()
@@ -34,17 +32,17 @@ void reglas_juego::key_event(QKeyEvent *event)
 
 void reglas_juego::disparar()
 {
-    nuevo_disparo = new Disparo(0.05);
+    nuevo_disparo = new Disparo(0.05, 10.0, -1.0);
+    //qDebug() << "Bala creada";
     nuevo_disparo->setPos(blas->x(), blas->y());
     scene->addItem(nuevo_disparo);
-
 }
 
 void reglas_juego::set_blas_keys()
 {
     blas_keys[0] = Qt::Key_A;
     blas_keys[1] = Qt::Key_D;
-    blas_keys[2] = Qt::Key_S;
+    blas_keys[2] = Qt::Key_Space;
 }
 
 void reglas_juego::generate_map()
@@ -52,9 +50,7 @@ void reglas_juego::generate_map()
         muralla = new escenario(0.72);
         muralla->setPos(0,396);
         scene->addItem(muralla);
-
 }
-
 
 void reglas_juego::setup_scene()
 {
@@ -94,6 +90,7 @@ void reglas_juego::setup_enemigo()
     enemigo2 = new enemigo(150,0,20 ,0.5);
     scene->addItem(enemigo2);
 }
+
 void reglas_juego::start_parabolic()
 {
     enemigo2->start_parabolic_movement();
