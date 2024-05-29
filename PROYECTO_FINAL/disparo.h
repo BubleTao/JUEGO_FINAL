@@ -10,13 +10,14 @@ class Disparo : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Disparo(float scale);
+    Disparo(float scale, float speed = 10.0, float direction = -1.0);
     ~Disparo();
 
 private:
     QRect set_complete_sprites();
     void set_animations();
-
+    float speed;
+    float direction;
     sprites *pixmap_management;
 
 public slots:
