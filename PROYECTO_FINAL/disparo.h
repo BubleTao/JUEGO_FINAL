@@ -3,6 +3,13 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 
+#include "enemigos.h"
+#include "muerte.h"
+#include <QTimer>
+#include <QList>
+#include <QGraphicsScene>
+#include <QDebug>
+
 #include "sprites.h"
 #define bala_pixel_x_size 433
 #define bala_pixel_y_size 433
@@ -14,6 +21,7 @@ public:
     ~Disparo();
 
 private:
+    muerte *animacion_muerte;
     QRect set_complete_sprites();
     void set_animations();
     float speed;

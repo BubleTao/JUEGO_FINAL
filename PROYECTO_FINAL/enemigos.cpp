@@ -2,7 +2,7 @@
 
 enemigo::enemigo(int x, int y, int h,float scale) : fisicas(x,y,h,this)
 {
-    pixmap_management = new sprites(":/imagenes/enemigo1.png", scale); // Cargamos la imagen del enemigo - Falta configurarlo.
+    pixmap_management = new sprites(":/imagenes/enemigo2.png", scale); // Cargamos la imagen del enemigo - Falta configurarlo.
     pixmap_management->cut_character_pixmap(set_complete_sprites());
     pixmap_management->set_design_size(enemigo_pixel_x_size, enemigo_pixel_y_size);
     set_animations();
@@ -13,6 +13,15 @@ enemigo::enemigo(int x, int y, int h,float scale) : fisicas(x,y,h,this)
 enemigo::~enemigo()
 {
     delete pixmap_management;
+}
+
+void enemigo::muerte()
+{
+    pixmap_management = new sprites(":/imagenes/muerte_enemigos.png", 0.5); // Cargamos la imagen del enemigo - Falta configurarlo.
+    pixmap_management->cut_character_pixmap(set_complete_sprites());
+    pixmap_management->set_design_size(enemigo_pixel_x_size, enemigo_pixel_y_size);
+    set_animations();
+    setPixmap(pixmap_management->get_current_pixmap(0));
 }
 
 QRect enemigo::set_complete_sprites()
@@ -34,3 +43,5 @@ void enemigo::set_animations()
     dim.setWidth(4 * enemigo_pixel_x_size);
     pixmap_management->add_new_animation(dim,4);
 }
+
+

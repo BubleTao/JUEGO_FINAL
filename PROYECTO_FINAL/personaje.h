@@ -6,7 +6,7 @@
 #include "sprites.h"
 
 #define blas_pixel_x_size 35
-#define blas_pixel_y_size 41
+#define blas_pixel_y_size 40
 #define blas_speed 8
 
 class personaje : public QObject, public QGraphicsPixmapItem
@@ -22,7 +22,6 @@ private:
     void set_animations();
     void set_left_animation();
     void set_right_animation();
-    void set_up_animation();
     void set_down_animation();
     void set_death_animation();
 

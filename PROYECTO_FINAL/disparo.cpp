@@ -1,10 +1,5 @@
-#include "disparo.h"
-#include "enemigos.h"
-#include <QTimer>
-#include <QList>
-#include <QGraphicsScene>
-#include <QDebug>
 
+#include "disparo.h"
 
 Disparo::Disparo(float scale, float speed, float direction)
     : speed(speed), direction(direction)
@@ -14,11 +9,6 @@ Disparo::Disparo(float scale, float speed, float direction)
     pixmap_management->cut_character_pixmap(set_complete_sprites());
 
     QPixmap pixmap = pixmap_management->get_fixed_image(set_complete_sprites());
-    if (pixmap.isNull()) {
-        qDebug() << "Error: Unable to create QPixmap from scaled image.";
-        return;
-    }
-
     setPixmap(pixmap);
 
     QTimer *timer = new QTimer(this);
@@ -52,9 +42,10 @@ void Disparo::move()
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (QGraphicsItem *item : colliding_items) {
         if (typeid(*item) == typeid(enemigo)) {
-            //Colision con el enemigo
             scene()->removeItem(item);
             scene()->removeItem(this);
+            //animacion_muerte = new muerte(0.5);
+            //scene()->addItem(animacion_muerte);
             delete item;
             delete this;
             return;

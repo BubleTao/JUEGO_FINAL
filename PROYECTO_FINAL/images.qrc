@@ -10,5 +10,7 @@
         <file>imagenes/muralla.png</file>
         <file>imagenes/disparo.png</file>
         <file>imagenes/fondo1.png</file>
+        <file>imagenes/menu.png</file>
+        <file>imagenes/MUSICA EPICA PARA PIRATAS EPICOS.mp3</file>
     </qresource>
 </RCC>
