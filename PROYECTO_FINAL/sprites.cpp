@@ -1,6 +1,6 @@
 #include "sprites.h"
 
-sprites::sprites(QString main_pixmap,float scale)
+sprites::sprites(QString main_pixmap, unsigned int scale)
 {
     this->main_pixmap = new QPixmap;
     character_pixmap = new QPixmap;
@@ -25,7 +25,6 @@ void sprites::add_new_animation(QRect size,unsigned int number)
     animations.push_back(size);
     animations_size.push_back(number);
 }
-
 
 QPixmap sprites::get_current_pixmap(unsigned int animation)
 {
