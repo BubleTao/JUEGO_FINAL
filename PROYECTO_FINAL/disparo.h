@@ -17,7 +17,7 @@ class Disparo : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Disparo(float scale, float speed = 10.0, float direction = -1.0);
+    Disparo(QVector<enemigo *> enemy, float scale, float speed = 10.0, float direction = -1.0);
     ~Disparo();
 
 private:
@@ -27,9 +27,18 @@ private:
     float speed;
     float direction;
     sprites *pixmap_management;
+    QVector<enemigo *> enemy;
+    QTimer *timer;
+
+    bool test_collition();
+    bool test_range();
 
 public slots:
     void move();
+
+signals:
+    void is_enemy_reached(QGraphicsItem *shoot, int item);
+    void is_shoot_out_of_range(QGraphicsItem *shoot);
 };
 
 #endif // DISPARO_H

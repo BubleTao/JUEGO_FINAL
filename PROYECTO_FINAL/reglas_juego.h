@@ -14,6 +14,7 @@
 #include <QApplication>
 #include <QTimer>
 #include <QMediaPlayer>
+#include <QAudioOutput>
 
 #include "personaje.h"
 #include "escenario.h"
@@ -26,47 +27,50 @@
 #define game_map_size_col 16
 #define game_map_size_fil 13
 
-class reglas_juego
+class reglas_juego : public QObject
 {
+    Q_OBJECT
 public:
-    reglas_juego(QGraphicsView *graph, QVector<QLabel *> game_labels);
+    reglas_juego(QGraphicsView *graph);
     ~reglas_juego();
     void key_event(QKeyEvent *event);
 
 public slots:
     void disparar();
-
-
+    void enemy_is_reached(QGraphicsItem *item, int enemy);
+    void remove_shoot(QGraphicsItem *shoot);
+    void nivel2();
 private:
     QTimer *timer;
+    QTimer *duracion_nivel;
     QGraphicsView *graph;
 
 
     QVector<QLabel *> labels;
     QGraphicsScene *scene;
     personaje *blas;
-    enemigo *enemigo2;
-    enemigo *enemigo1;
-    enemigo *enemigo3;
-    enemigo *enemigo4;
+    QVector<enemigo *> enemys;
     escenario *muralla;
     unsigned int blas_keys[4];
     float difficult = 0.2;
-    Disparo *nuevo_disparo; // Objeto de la clase Disparo
+    QVector<Disparo *> disparos; // Objeto de la clase Disparo
     QMediaPlayer *musicPlayer;
+
 
     void set_blas_keys();
     void generate_map();
-    void setup_scene();
-    void setup_enemigo();
+    void setup_scene(QString fondo);
+    void setup_enemigo(QString sprite, QString sprite2);
     void setup_blas();
     bool down_movement_is_valid(QGraphicsPixmapItem *item);
-    QBrush set_rgb_color(int r, int g, int b, int a = 255);
     void start_parabolic();
     void start_zigzag();
     void start_harmonic();
     void start_pendulum();
-
+    void star_music();
+    bool pared_valida(bool izq);
+    void load_level_1();
+    void clear_scene();
 
 };
 

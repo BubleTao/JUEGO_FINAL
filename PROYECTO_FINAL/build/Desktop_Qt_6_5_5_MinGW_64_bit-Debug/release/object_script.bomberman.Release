@@ -12,4 +12,5 @@ release/qrc_images.o
 release/moc_disparo.o
 release/moc_fisicas.o
 release/moc_muerte.o
+release/moc_reglas_juego.o
 release/moc_ventanas.o

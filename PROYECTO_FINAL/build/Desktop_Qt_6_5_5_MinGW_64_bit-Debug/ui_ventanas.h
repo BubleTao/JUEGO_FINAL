@@ -14,6 +14,7 @@
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,12 +24,11 @@ class Ui_ventanas
 public:
     QWidget *centralwidget;
     QWidget *Game_window;
-    QLabel *L_life_counter;
-    QLabel *L_life;
-    QLabel *L_time;
-    QLabel *L_Points;
-    QLabel *L_time_counter;
     QGraphicsView *graphicsView;
+    QWidget *widget;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QLabel *label;
 
     void setupUi(QMainWindow *ventanas)
     {
@@ -40,24 +40,25 @@ public:
         Game_window = new QWidget(centralwidget);
         Game_window->setObjectName("Game_window");
         Game_window->setGeometry(QRect(20, 20, 571, 481));
-        L_life_counter = new QLabel(Game_window);
-        L_life_counter->setObjectName("L_life_counter");
-        L_life_counter->setGeometry(QRect(10, 40, 49, 16));
-        L_life = new QLabel(Game_window);
-        L_life->setObjectName("L_life");
-        L_life->setGeometry(QRect(20, 70, 49, 16));
-        L_time = new QLabel(Game_window);
-        L_time->setObjectName("L_time");
-        L_time->setGeometry(QRect(70, 40, 49, 16));
-        L_Points = new QLabel(Game_window);
-        L_Points->setObjectName("L_Points");
-        L_Points->setGeometry(QRect(80, 70, 49, 16));
-        L_time_counter = new QLabel(Game_window);
-        L_time_counter->setObjectName("L_time_counter");
-        L_time_counter->setGeometry(QRect(30, 20, 49, 16));
         graphicsView = new QGraphicsView(Game_window);
         graphicsView->setObjectName("graphicsView");
         graphicsView->setGeometry(QRect(-10, -10, 370, 600));
+        widget = new QWidget(Game_window);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(0, 0, 361, 481));
+        pushButton = new QPushButton(widget);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(60, 300, 75, 24));
+        pushButton_2 = new QPushButton(widget);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(200, 300, 75, 24));
+        label = new QLabel(widget);
+        label->setObjectName("label");
+        label->setGeometry(QRect(60, 170, 221, 71));
+        QFont font;
+        font.setFamilies({QString::fromUtf8("Yu Gothic UI Semibold")});
+        font.setBold(true);
+        label->setFont(font);
         ventanas->setCentralWidget(centralwidget);
 
         retranslateUi(ventanas);
@@ -68,11 +69,9 @@ public:
     void retranslateUi(QMainWindow *ventanas)
     {
         ventanas->setWindowTitle(QCoreApplication::translate("ventanas", "ventanas", nullptr));
-        L_life_counter->setText(QCoreApplication::translate("ventanas", "TextLabel", nullptr));
-        L_life->setText(QCoreApplication::translate("ventanas", "TextLabel", nullptr));
-        L_time->setText(QCoreApplication::translate("ventanas", "TextLabel", nullptr));
-        L_Points->setText(QCoreApplication::translate("ventanas", "TextLabel", nullptr));
-        L_time_counter->setText(QCoreApplication::translate("ventanas", "TextLabel", nullptr));
+        pushButton->setText(QCoreApplication::translate("ventanas", "JUGAR", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("ventanas", "PushButton", nullptr));
+        label->setText(QCoreApplication::translate("ventanas", "DEFIENDE A CARTAGENA DE INDIAS", nullptr));
     } // retranslateUi
 
 };

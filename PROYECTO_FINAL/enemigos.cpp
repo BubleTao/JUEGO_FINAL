@@ -1,8 +1,8 @@
 #include "enemigos.h"
 
-enemigo::enemigo(int x, int y, int h,float scale) : fisicas(x,y,h,this)
+enemigo::enemigo(int x, int y, int h,float scale,QString ruta) : fisicas(x,y,h,this)
 {
-    pixmap_management = new sprites(":/imagenes/enemigo2.png", scale); // Cargamos la imagen del enemigo - Falta configurarlo.
+    pixmap_management = new sprites(ruta, scale); // Cargamos la imagen del enemigo - Falta configurarlo.
     pixmap_management->cut_character_pixmap(set_complete_sprites());
     pixmap_management->set_design_size(enemigo_pixel_x_size, enemigo_pixel_y_size);
     set_animations();

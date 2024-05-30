@@ -21,6 +21,7 @@ public:
 private:
     Ui::ventanas *ui;
     reglas_juego *game;
+public slots:
 
     void setup_game_rules();
 };

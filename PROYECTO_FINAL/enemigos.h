@@ -14,7 +14,7 @@
 class enemigo : public fisicas, public QGraphicsPixmapItem
 {
 public:
-    enemigo(int x, int y, int h,float scale);
+    enemigo(int x, int y, int h,float scale,QString ruta);
     ~enemigo();
     void muerte();
 

@@ -12,4 +12,5 @@ debug/qrc_images.o
 debug/moc_disparo.o
 debug/moc_fisicas.o
 debug/moc_muerte.o
+debug/moc_reglas_juego.o
 debug/moc_ventanas.o

@@ -6,7 +6,11 @@ ventanas::ventanas(QWidget *parent)
     , ui(new Ui::ventanas)
 {
     ui->setupUi(this);
-    setup_game_rules();
+    ui->graphicsView->setVisible(false);
+    ui->widget->setVisible(true);
+    ui->widget->setStyleSheet("background-image: url(:/imagenes/menu.png)");
+    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(setup_game_rules()));
+    //setup_game_rules();
 }
 
 ventanas::~ventanas()
@@ -22,14 +26,8 @@ void ventanas::keyPressEvent(QKeyEvent *event)
 
 void ventanas::setup_game_rules()
 {
-    QVector<QLabel *> labels;
-
-    labels.push_back(ui->L_Points);
-    labels.push_back(ui->L_life);
-    labels.push_back(ui->L_life_counter);
-    labels.push_back(ui->L_time);
-    labels.push_back(ui->L_time_counter);
-
-    game = new reglas_juego(ui->graphicsView,labels);
+    ui->graphicsView->setVisible(true);
+    ui->widget->setVisible(false);
+    game = new reglas_juego(ui->graphicsView);
 }
 

@@ -12,5 +12,7 @@
         <file>imagenes/fondo1.png</file>
         <file>imagenes/menu.png</file>
         <file>imagenes/MUSICA EPICA PARA PIRATAS EPICOS.mp3</file>
+        <file>imagenes/fondo2.png</file>
+        <file>imagenes/fondo3.png</file>
     </qresource>
 </RCC>

@@ -23,7 +23,6 @@ fisicas::fisicas(int x, int y, int h, QGraphicsPixmapItem *item)
     p_time = new QTimer;
     z_time = new QTimer;
     harmonic_time = new QTimer;
-    p_time = new QTimer;
     pendulum_time = new QTimer;
     default_movement = new QTimer;
 
@@ -42,12 +41,13 @@ fisicas::~fisicas()
     delete default_movement;
     delete z_time;
     delete harmonic_time;
+    delete pendulum_time;
 }
 
 void fisicas::start_parabolic_movement()
 {
     default_movement->stop();
-    set_starting_parameters(x, y, -10, 400);
+    set_starting_parameters(x, y, -100, 500);
     p_time->start(time_step);
 }
 void fisicas::start_zigzag_movement()
