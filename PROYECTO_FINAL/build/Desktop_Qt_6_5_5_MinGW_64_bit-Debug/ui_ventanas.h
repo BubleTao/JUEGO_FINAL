@@ -54,10 +54,11 @@ public:
         pushButton_2->setGeometry(QRect(200, 300, 75, 24));
         label = new QLabel(widget);
         label->setObjectName("label");
-        label->setGeometry(QRect(60, 170, 221, 71));
+        label->setGeometry(QRect(60, 180, 251, 61));
         QFont font;
-        font.setFamilies({QString::fromUtf8("Yu Gothic UI Semibold")});
-        font.setBold(true);
+        font.setFamilies({QString::fromUtf8("Rationale")});
+        font.setPointSize(16);
+        font.setBold(false);
         label->setFont(font);
         ventanas->setCentralWidget(centralwidget);
 
@@ -70,7 +71,7 @@ public:
     {
         ventanas->setWindowTitle(QCoreApplication::translate("ventanas", "ventanas", nullptr));
         pushButton->setText(QCoreApplication::translate("ventanas", "JUGAR", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("ventanas", "PushButton", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("ventanas", "SALIR", nullptr));
         label->setText(QCoreApplication::translate("ventanas", "DEFIENDE A CARTAGENA DE INDIAS", nullptr));
     } // retranslateUi
 

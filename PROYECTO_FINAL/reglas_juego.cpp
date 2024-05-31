@@ -177,15 +177,14 @@ void reglas_juego::start_pendulum()
     enemys[3]->start_pendulum_motion(200,10);
 }
 
-void reglas_juego::star_music()
-{
-    musicPlayer = new QMediaPlayer;
-    musicPlayer->setSource(QUrl(":/imagenes/MUSICA EPICA PARA PIRATAS EPICOS.mp3"));
-    musicPlayer->setAudioOutput(new QAudioOutput);
-    musicPlayer->audioOutput() ->setVolume(50);
+void reglas_juego::star_music() {
+    QMediaPlayer *musicPlayer = new QMediaPlayer(this);
+    QAudioOutput *audioOutput = new QAudioOutput(this);
+    musicPlayer->setAudioOutput(audioOutput);
+    audioOutput->setVolume(50);
+    musicPlayer->setSource(QUrl("qrc:/imagenes/MUSICA EPICA PARA PIRATAS EPICOS.mp3"));
     musicPlayer->play();
 }
-
 
 
 

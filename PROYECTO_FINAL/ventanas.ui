@@ -65,22 +65,23 @@
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>SALIR</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>170</y>
-        <width>221</width>
-        <height>71</height>
+        <y>180</y>
+        <width>251</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Yu Gothic UI Semibold</family>
-        <bold>true</bold>
+        <family>Rationale</family>
+        <pointsize>16</pointsize>
+        <bold>false</bold>
        </font>
       </property>
       <property name="text">
