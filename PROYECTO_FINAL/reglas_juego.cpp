@@ -8,9 +8,13 @@ reglas_juego::reglas_juego(QGraphicsView *graph)
     this->graph = graph;
     duracion_nivel = new QTimer;
     load_level_1();
+    muralla_vida = 1;
     //labels
     connect(duracion_nivel, SIGNAL(timeout()), this, SLOT(nivel2()));
 
+    QTimer *collision_timer = new QTimer(this);
+    connect(collision_timer, SIGNAL(timeout()), this, SLOT(enemigos_Collisi()));
+    collision_timer->start(50); // Verificar colisiones cada 50 ms
 }
 
 reglas_juego::~reglas_juego()
@@ -67,8 +71,6 @@ void reglas_juego::clear_scene()
     enemys.clear();
     disparos.clear();
 }
-
-
 
 void reglas_juego::remove_shoot(QGraphicsItem *shoot)
 {
@@ -186,5 +188,27 @@ void reglas_juego::star_music() {
     musicPlayer->play();
 }
 
+void reglas_juego::enemigos_Collisi()
+{
+    for (int i = 0; i < enemys.size(); ++i)
+    {
+        if (enemys[i]->collidesWithItem(muralla))
+        {
+            // Reducir la vida de la muralla al colisionar con un enemigo
+            muralla_vida--;
+            scene->removeItem(enemys[i]);
+            delete enemys[i];
+            enemys.remove(i);
 
+            // Verificar si la vida de la muralla ha llegado a 0
+            if (muralla_vida <= 0)
+            {
+                // Terminar el juego
+                qDebug() << "Game Over";
+                QApplication::quit();
+            }
+            break;
+        }
+    }
+}
 
