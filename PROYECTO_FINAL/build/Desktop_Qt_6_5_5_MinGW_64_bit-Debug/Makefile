@@ -342,7 +342,6 @@ Makefile: ../../bomberman.pro D:/QT1/6.5.5/mingw_64/mkspecs/win32-g++/qmake.conf
 		D:/QT1/6.5.5/mingw_64/mkspecs/features/qt_config.prf \
 		D:/QT1/6.5.5/mingw_64/mkspecs/win32-g++/qmake.conf \
 		D:/QT1/6.5.5/mingw_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		D:/QT1/6.5.5/mingw_64/mkspecs/features/exclusive_builds.prf \
 		D:/QT1/6.5.5/mingw_64/mkspecs/features/toolchain.prf \
 		D:/QT1/6.5.5/mingw_64/mkspecs/features/default_pre.prf \
@@ -373,6 +372,7 @@ Makefile: ../../bomberman.pro D:/QT1/6.5.5/mingw_64/mkspecs/win32-g++/qmake.conf
 		D:/QT1/6.5.5/mingw_64/lib/Qt6Network.prl \
 		D:/QT1/6.5.5/mingw_64/lib/Qt6Core.prl \
 		D:/QT1/6.5.5/mingw_64/lib/Qt6EntryPoint.prl \
+		.qmake.stash \
 		D:/QT1/6.5.5/mingw_64/mkspecs/features/build_pass.prf \
 		../../images.qrc
 	$(QMAKE) -o Makefile ..\..\bomberman.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -648,7 +648,6 @@ D:/QT1/6.5.5/mingw_64/mkspecs/features/qt_functions.prf:
 D:/QT1/6.5.5/mingw_64/mkspecs/features/qt_config.prf:
 D:/QT1/6.5.5/mingw_64/mkspecs/win32-g++/qmake.conf:
 D:/QT1/6.5.5/mingw_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 D:/QT1/6.5.5/mingw_64/mkspecs/features/exclusive_builds.prf:
 D:/QT1/6.5.5/mingw_64/mkspecs/features/toolchain.prf:
 D:/QT1/6.5.5/mingw_64/mkspecs/features/default_pre.prf:
@@ -679,6 +678,7 @@ D:/QT1/6.5.5/mingw_64/lib/Qt6Gui.prl:
 D:/QT1/6.5.5/mingw_64/lib/Qt6Network.prl:
 D:/QT1/6.5.5/mingw_64/lib/Qt6Core.prl:
 D:/QT1/6.5.5/mingw_64/lib/Qt6EntryPoint.prl:
+.qmake.stash:
 D:/QT1/6.5.5/mingw_64/mkspecs/features/build_pass.prf:
 ../../images.qrc:
 qmake: FORCE

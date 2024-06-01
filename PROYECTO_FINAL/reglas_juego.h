@@ -40,10 +40,12 @@ public slots:
     void enemy_is_reached(QGraphicsItem *item, int enemy);
     void remove_shoot(QGraphicsItem *shoot);
     void nivel2();
+    void enemigos_Collisi();
 private:
     QTimer *timer;
     QTimer *duracion_nivel;
     QGraphicsView *graph;
+    int muralla_vida;
 
 
     QVector<QLabel *> labels;
@@ -51,6 +53,7 @@ private:
     personaje *blas;
     QVector<enemigo *> enemys;
     escenario *muralla;
+    muerte *animacion_muerte;
     unsigned int blas_keys[4];
     float difficult = 0.2;
     QVector<Disparo *> disparos; // Objeto de la clase Disparo

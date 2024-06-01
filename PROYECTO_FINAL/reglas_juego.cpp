@@ -8,8 +8,13 @@ reglas_juego::reglas_juego(QGraphicsView *graph)
     this->graph = graph;
     duracion_nivel = new QTimer;
     load_level_1();
-    //labels
+    muralla_vida = 1;
+    //niveles
     connect(duracion_nivel, SIGNAL(timeout()), this, SLOT(nivel2()));
+    //
+    QTimer *collision_timer = new QTimer(this);
+    connect(collision_timer, SIGNAL(timeout()), this, SLOT(enemigos_Collisi()));
+    collision_timer->start(50);
 
 }
 
@@ -82,6 +87,30 @@ void reglas_juego::remove_shoot(QGraphicsItem *shoot)
     }
 }
 
+void reglas_juego::enemigos_Collisi()
+{
+    for (int i = 0; i < enemys.size(); ++i)
+    {
+        if (enemys[i]->collidesWithItem(muralla))
+        {
+
+            muralla_vida--;
+            scene->removeItem(enemys[i]);
+            delete enemys[i];
+            enemys.remove(i);
+
+
+            if (muralla_vida <= 0)
+            {
+
+                qDebug() << "Game Over";
+                QApplication::quit();
+            }
+            break;
+        }
+    }
+}
+
 void reglas_juego::nivel2()
 {
     setup_scene(":/imagenes/fondo2.png");
@@ -109,7 +138,24 @@ void reglas_juego::disparar()
 void reglas_juego::enemy_is_reached(QGraphicsItem *item, int enemy)
 {
     remove_shoot(item);
-    // Llama la rutina de muerteaquiiiii
+
+    QGraphicsItem* enemy_item = enemys[enemy];
+    QPointF enemy_position = enemy_item->pos();
+    enemys.remove(enemy);
+    scene->removeItem(enemy_item);
+    delete enemy_item;
+
+    // Crear la animación de muerte
+
+    animacion_muerte = new muerte(0.8);
+    animacion_muerte->setPos(enemy_position);
+    scene->addItem(animacion_muerte);
+    connect(animacion_muerte, &muerte::animation_finished, [this]() {
+        scene->removeItem(animacion_muerte);
+        delete animacion_muerte;
+        animacion_muerte = nullptr;
+    });
+    animacion_muerte->start_animation();
 }
 
 void reglas_juego::set_blas_keys()
