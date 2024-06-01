@@ -1,6 +1,7 @@
 release/disparo.o
 release/enemigos.o
 release/escenario.o
+release/finalboss.o
 release/fisicas.o
 release/main.o
 release/muerte.o

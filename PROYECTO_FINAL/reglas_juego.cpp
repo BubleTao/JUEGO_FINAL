@@ -7,10 +7,13 @@ reglas_juego::reglas_juego(QGraphicsView *graph)
     srand(time(NULL));
     this->graph = graph;
     duracion_nivel = new QTimer;
+    duracion_nivel2 = new QTimer;
+
     load_level_1();
     muralla_vida = 1;
     //niveles
     connect(duracion_nivel, SIGNAL(timeout()), this, SLOT(nivel2()));
+    connect(duracion_nivel2, SIGNAL(timeout()), this, SLOT(nivel3()));
     //
     QTimer *collision_timer = new QTimer(this);
     connect(collision_timer, SIGNAL(timeout()), this, SLOT(enemigos_Collisi()));
@@ -23,7 +26,12 @@ reglas_juego::~reglas_juego()
     delete scene;
     delete blas;
     delete musicPlayer;
+    delete musicPlayerboss;
     delete duracion_nivel;
+    delete duracion_nivel2;
+    delete muralla;
+    delete barcofinal;
+    delete animacion_muerte;
     for(int i=0; i<enemys.length(); i++) delete enemys[i];
     for(int i=0; i<disparos.length(); i++) delete disparos[i];
     enemys.clear();
@@ -54,8 +62,8 @@ bool reglas_juego::pared_valida(bool izq)
 void reglas_juego::load_level_1()
 {
     setup_scene(":/imagenes/fondo1.png");
-    duracion_nivel->start(40000);
-    setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png");
+    duracion_nivel->start(5000);
+    setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png",0.5);
     start_parabolic();
     start_zigzag();
     start_harmonic();
@@ -113,10 +121,11 @@ void reglas_juego::enemigos_Collisi()
 
 void reglas_juego::nivel2()
 {
+    duracion_nivel->stop();
     setup_scene(":/imagenes/fondo2.png");
     clear_scene();
-    //duracion_nivel->start(40000);
-    setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png");
+    duracion_nivel2->start(5000);
+    setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png",0.5);
     start_parabolic();
     start_zigzag();
     start_harmonic();
@@ -124,6 +133,23 @@ void reglas_juego::nivel2()
     setup_blas();
     start_pendulum();
     star_music();
+}
+void reglas_juego::nivel3()
+{
+
+    duracion_nivel2->stop();
+    setup_scene(":/imagenes/fondo3.png");
+    clear_scene();
+    //duracion_nivel->start(40000);
+    setup_enemigo(":/imagenes/balajefe.png",":/imagenes/balajefe.png",0.25);
+    start_parabolic();
+    start_zigzag();
+    start_harmonic();
+    generate_map();
+    generate_finalboss();
+    setup_blas();
+    start_pendulum();
+    star_musicboss();
 }
 void reglas_juego::disparar()
 {
@@ -172,6 +198,13 @@ void reglas_juego::generate_map()
         scene->addItem(muralla);
 }
 
+void reglas_juego::generate_finalboss()
+{
+    barcofinal = new finalboss(0.25);
+    barcofinal->setPos(80,5);
+    scene->addItem(barcofinal);
+}
+
 void reglas_juego::setup_scene(QString fondo)
 {
     int new_width = 370;
@@ -195,12 +228,12 @@ void reglas_juego::setup_blas()
 }
 
 
-void reglas_juego::setup_enemigo(QString sprite,QString sprite2)
+void reglas_juego::setup_enemigo(QString sprite,QString sprite2, float scale)
 {
-    enemys.push_back(new enemigo(30,0,20 ,0.5,sprite2));
-    enemys.push_back(new enemigo(150,0,20 ,0.5,sprite));
-    enemys.push_back(new enemigo(190,0,20 ,0.5,sprite2));
-    enemys.push_back(new enemigo(50,0,20 ,0.5,sprite));
+    enemys.push_back(new enemigo(30,0,20 ,scale,sprite2));
+    enemys.push_back(new enemigo(150,0,20 ,scale,sprite));
+    enemys.push_back(new enemigo(190,0,20 ,scale,sprite2));
+    enemys.push_back(new enemigo(50,0,20 ,scale,sprite));
 
     for(short i=0; i<enemys.length(); i++) scene->addItem(enemys[i]);
 }
@@ -232,5 +265,12 @@ void reglas_juego::star_music() {
     musicPlayer->play();
 }
 
-
+void reglas_juego::star_musicboss() {
+    QMediaPlayer *musicPlayerboss = new QMediaPlayer(this);
+    QAudioOutput *audioOutput = new QAudioOutput(this);
+    musicPlayerboss->setAudioOutput(audioOutput);
+    audioOutput->setVolume(50);
+    musicPlayerboss->setSource(QUrl("qrc:/imagenes/la-cancion-de-los-gigantes-dormidos-criaturas-mitologicas_kUk3HbNU.mp3"));
+    musicPlayerboss->play();
+}
 

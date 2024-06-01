@@ -1,6 +1,7 @@
 debug/disparo.o
 debug/enemigos.o
 debug/escenario.o
+debug/finalboss.o
 debug/fisicas.o
 debug/main.o
 debug/muerte.o

@@ -12,6 +12,7 @@ SOURCES += \
     disparo.cpp \
     enemigos.cpp \
     escenario.cpp \
+    finalboss.cpp \
     fisicas.cpp \
     main.cpp \
     muerte.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     disparo.h \
     enemigos.h \
     escenario.h \
+    finalboss.h \
     fisicas.h \
     muerte.h \
     personaje.h \

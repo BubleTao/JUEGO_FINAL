@@ -18,6 +18,7 @@
 
 #include "personaje.h"
 #include "escenario.h"
+#include "finalboss.h"
 #include "disparo.h"
 #include "enemigos.h"
 
@@ -40,10 +41,12 @@ public slots:
     void enemy_is_reached(QGraphicsItem *item, int enemy);
     void remove_shoot(QGraphicsItem *shoot);
     void nivel2();
+    void nivel3();
     void enemigos_Collisi();
 private:
     QTimer *timer;
     QTimer *duracion_nivel;
+    QTimer *duracion_nivel2;
     QGraphicsView *graph;
     int muralla_vida;
 
@@ -53,17 +56,20 @@ private:
     personaje *blas;
     QVector<enemigo *> enemys;
     escenario *muralla;
+    finalboss *barcofinal;
     muerte *animacion_muerte;
     unsigned int blas_keys[4];
     float difficult = 0.2;
     QVector<Disparo *> disparos; // Objeto de la clase Disparo
     QMediaPlayer *musicPlayer;
+    QMediaPlayer *musicPlayerboss;
 
 
     void set_blas_keys();
     void generate_map();
+    void generate_finalboss();
     void setup_scene(QString fondo);
-    void setup_enemigo(QString sprite, QString sprite2);
+    void setup_enemigo(QString sprite, QString sprite2, float scale);
     void setup_blas();
     bool down_movement_is_valid(QGraphicsPixmapItem *item);
     void start_parabolic();
@@ -71,6 +77,7 @@ private:
     void start_harmonic();
     void start_pendulum();
     void star_music();
+    void star_musicboss();
     bool pared_valida(bool izq);
     void load_level_1();
     void clear_scene();
