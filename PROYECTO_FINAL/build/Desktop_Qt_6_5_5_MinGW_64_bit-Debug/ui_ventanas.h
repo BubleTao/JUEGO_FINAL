@@ -49,17 +49,21 @@ public:
         pushButton = new QPushButton(widget);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(60, 300, 75, 24));
+        pushButton->setStyleSheet(QString::fromUtf8(""));
         pushButton_2 = new QPushButton(widget);
         pushButton_2->setObjectName("pushButton_2");
         pushButton_2->setGeometry(QRect(200, 300, 75, 24));
         label = new QLabel(widget);
         label->setObjectName("label");
-        label->setGeometry(QRect(60, 180, 251, 61));
-        QFont font;
-        font.setFamilies({QString::fromUtf8("Rationale")});
-        font.setPointSize(16);
-        font.setBold(false);
-        label->setFont(font);
+        label->setGeometry(QRect(70, 70, 200, 200));
+        label->setAutoFillBackground(false);
+        label->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    background-image: url(:/imagenes/titulo..png);\n"
+"    background-repeat: no-repeat;\n"
+"    background-position: center;\n"
+"    background-size: cover;\n"
+"}"));
+        label->setScaledContents(false);
         ventanas->setCentralWidget(centralwidget);
 
         retranslateUi(ventanas);
@@ -72,7 +76,7 @@ public:
         ventanas->setWindowTitle(QCoreApplication::translate("ventanas", "ventanas", nullptr));
         pushButton->setText(QCoreApplication::translate("ventanas", "JUGAR", nullptr));
         pushButton_2->setText(QCoreApplication::translate("ventanas", "SALIR", nullptr));
-        label->setText(QCoreApplication::translate("ventanas", "DEFIENDE A CARTAGENA DE INDIAS", nullptr));
+        label->setText(QString());
     } // retranslateUi
 
 };

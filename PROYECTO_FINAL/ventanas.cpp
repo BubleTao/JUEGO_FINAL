@@ -10,7 +10,9 @@ ventanas::ventanas(QWidget *parent)
     ui->widget->setVisible(true);
     ui->widget->setStyleSheet("background-image: url(:/imagenes/menu.png)");
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(setup_game_rules()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(close()));
     //setup_game_rules();
+    //pushButton_2
 }
 
 ventanas::~ventanas()

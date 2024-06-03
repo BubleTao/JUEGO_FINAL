@@ -51,6 +51,9 @@
         <height>24</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>JUGAR</string>
       </property>
@@ -71,21 +74,28 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>180</y>
-        <width>251</width>
-        <height>61</height>
+        <x>70</x>
+        <y>70</y>
+        <width>200</width>
+        <height>200</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>Rationale</family>
-        <pointsize>16</pointsize>
-        <bold>false</bold>
-       </font>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    background-image: url(:/imagenes/titulo..png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}</string>
       </property>
       <property name="text">
-       <string>DEFIENDE A CARTAGENA DE INDIAS</string>
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
      </widget>
     </widget>
