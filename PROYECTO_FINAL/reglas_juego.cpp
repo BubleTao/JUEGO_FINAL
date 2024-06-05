@@ -8,9 +8,17 @@ reglas_juego::reglas_juego(QGraphicsView *graph)
     this->graph = graph;
     duracion_nivel = new QTimer;
     duracion_nivel2 = new QTimer;
+    shooting_timer = new QTimer(this);
+    //enemy_spawn_timer = new QTimer;
 
     load_level_1();
     muralla_vida = 1;
+
+    //enemy_spawn_timer->start(2000);
+
+    // Configura el temporizador de disparos
+    connect(shooting_timer, &QTimer::timeout, this, &reglas_juego::enableShooting);
+
     //niveles
     connect(duracion_nivel, SIGNAL(timeout()), this, SLOT(nivel2()));
     connect(duracion_nivel2, SIGNAL(timeout()), this, SLOT(nivel3()));
@@ -36,6 +44,8 @@ reglas_juego::~reglas_juego()
     for(int i=0; i<disparos.length(); i++) delete disparos[i];
     enemys.clear();
     disparos.clear();
+    delete shooting_timer;
+    //delete enemy_spawn_timer;
 }
 
 
@@ -62,7 +72,7 @@ bool reglas_juego::pared_valida(bool izq)
 void reglas_juego::load_level_1()
 {
     setup_scene(":/imagenes/fondo1.png");
-    duracion_nivel->start(5000);
+    duracion_nivel->start(50000);
     setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png",0.5);
     start_parabolic();
     start_zigzag();
@@ -153,12 +163,15 @@ void reglas_juego::nivel3()
 }
 void reglas_juego::disparar()
 {
+    if (!shooting_timer->isActive()) {
     disparos.push_back(new Disparo(enemys, 0.03, 10.0, -1.0));
     connect(disparos[disparos.length()-1],SIGNAL(is_enemy_reached(QGraphicsItem*,int)),this,SLOT(enemy_is_reached(QGraphicsItem*,int)));
     connect(disparos[disparos.length()-1],SIGNAL(is_shoot_out_of_range(QGraphicsItem*)),this,SLOT(remove_shoot(QGraphicsItem*)));
     //qDebug() << "Bala creada";
     disparos[disparos.length()-1]->setPos(blas->x(), blas->y());
     scene->addItem(disparos[disparos.length()-1]);
+    shooting_timer->start(3000);
+    }
 }
 
 void reglas_juego::enemy_is_reached(QGraphicsItem *item, int enemy)
@@ -274,3 +287,22 @@ void reglas_juego::star_musicboss() {
     musicPlayerboss->play();
 }
 
+void reglas_juego::enableShooting()
+{
+    shooting_timer->stop();
+}
+
+/*
+void reglas_juego::spawn_enemy()
+{
+    int x = rand() % 300 + 50;
+    int y = 0;
+    int h = 600;
+    float scale = 0.5;
+    QString ruta = ":/imagenes/enemigo1.png";
+
+    enemigo *new_enemy = new enemigo(x, y, h, scale, ruta);
+    enemys.append(new_enemy);
+    scene->addItem(new_enemy);
+    new_enemy->start_parabolic_movement();
+}*/

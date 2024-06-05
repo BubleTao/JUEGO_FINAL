@@ -43,13 +43,17 @@ public slots:
     void nivel2();
     void nivel3();
     void enemigos_Collisi();
+    void enableShooting();
+    //void spawn_enemy();
+
 private:
     QTimer *timer;
     QTimer *duracion_nivel;
     QTimer *duracion_nivel2;
     QGraphicsView *graph;
     int muralla_vida;
-
+    QTimer *shooting_timer;
+    //QTimer *enemy_spawn_timer;
 
     QVector<QLabel *> labels;
     QGraphicsScene *scene;
