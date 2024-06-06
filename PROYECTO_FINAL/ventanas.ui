@@ -88,7 +88,7 @@
     background-image: url(:/imagenes/titulo..png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+
 }</string>
       </property>
       <property name="text">

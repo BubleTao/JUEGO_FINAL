@@ -61,7 +61,7 @@ public:
 "    background-image: url(:/imagenes/titulo..png);\n"
 "    background-repeat: no-repeat;\n"
 "    background-position: center;\n"
-"    background-size: cover;\n"
+"\n"
 "}"));
         label->setScaledContents(false);
         ventanas->setCentralWidget(centralwidget);

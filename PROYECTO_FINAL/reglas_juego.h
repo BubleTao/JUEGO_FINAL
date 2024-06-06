@@ -49,7 +49,8 @@ private:
     QTimer *duracion_nivel2;
     QGraphicsView *graph;
     int muralla_vida;
-
+    QTimer *disparo_timer;
+    bool puede_disparar;
 
     QVector<QLabel *> labels;
     QGraphicsScene *scene;
@@ -63,6 +64,8 @@ private:
     QVector<Disparo *> disparos; // Objeto de la clase Disparo
     QMediaPlayer *musicPlayer;
     QMediaPlayer *musicPlayerboss;
+    QAudioOutput *audioOutput;
+    QAudioOutput *audioOutputboss;
 
 
     void set_blas_keys();
@@ -81,6 +84,7 @@ private:
     bool pared_valida(bool izq);
     void load_level_1();
     void clear_scene();
+    void habilitar_disparo();
 
 };
 
