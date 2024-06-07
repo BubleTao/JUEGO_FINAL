@@ -43,10 +43,13 @@ public slots:
     void nivel2();
     void nivel3();
     void enemigos_Collisi();
+    void setup_enemy_spawn(QString sprite, float scale, int interval, int tipo_movimiento);
+    void spawn_enemy(QString sprite, float scale, int tipo_movimiento);
 private:
     QTimer *timer;
     QTimer *duracion_nivel;
     QTimer *duracion_nivel2;
+    QTimer *spawn_timer;
     QGraphicsView *graph;
     int muralla_vida;
     QTimer *disparo_timer;
@@ -60,7 +63,6 @@ private:
     finalboss *barcofinal;
     muerte *animacion_muerte;
     unsigned int blas_keys[4];
-    float difficult = 0.2;
     QVector<Disparo *> disparos; // Objeto de la clase Disparo
     QMediaPlayer *musicPlayer;
     QMediaPlayer *musicPlayerboss;
@@ -72,7 +74,6 @@ private:
     void generate_map();
     void generate_finalboss();
     void setup_scene(QString fondo);
-    void setup_enemigo(QString sprite, QString sprite2, float scale);
     void setup_blas();
     bool down_movement_is_valid(QGraphicsPixmapItem *item);
     void start_parabolic();
@@ -80,6 +81,7 @@ private:
     void start_harmonic();
     void start_pendulum();
     void star_music();
+    void star_music2();
     void star_musicboss();
     bool pared_valida(bool izq);
     void load_level_1();

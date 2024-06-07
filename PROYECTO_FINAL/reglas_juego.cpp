@@ -42,6 +42,7 @@ reglas_juego::~reglas_juego()
     delete muralla;
     delete barcofinal;
     delete animacion_muerte;
+    delete spawn_timer;
     for(int i=0; i<enemys.length(); i++) delete enemys[i];
     for(int i=0; i<disparos.length(); i++) delete disparos[i];
     enemys.clear();
@@ -72,17 +73,39 @@ bool reglas_juego::pared_valida(bool izq)
 void reglas_juego::load_level_1()
 {
     setup_scene(":/imagenes/fondo1.png");
-    duracion_nivel->start(6000);
-    setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png",0.5);
-    start_parabolic();
-    start_zigzag();
-    start_harmonic();
+    duracion_nivel->start(80000);
+    setup_enemy_spawn(":/imagenes/enemigo2.png", 0.5, 6000, 4);
+    setup_enemy_spawn(":/imagenes/enemigo2.png", 0.5, 4000, 2);
     generate_map();
     setup_blas();
-    start_pendulum();
     star_music();
 }
-
+void reglas_juego::nivel2()
+{
+    duracion_nivel->stop();
+    setup_scene(":/imagenes/fondo2.png");
+    clear_scene();
+    setup_enemy_spawn(":/imagenes/enemigo1.png", 0.5, 8000, 1);
+    duracion_nivel2->start(70000);
+    generate_map();
+    setup_blas();
+    star_music();
+}
+void reglas_juego::nivel3()
+{
+    if (musicPlayer->isPlaying()) {
+        musicPlayer->stop();
+    }
+    duracion_nivel2->stop();
+    setup_scene(":/imagenes/fondo3.png");
+    clear_scene();
+    setup_enemy_spawn(":/imagenes/enemigo2.png", 0.5, 7000, 2);
+    setup_enemy_spawn(":/imagenes/balajefe.png", 0.5, 9000, 3);
+    generate_map();
+    generate_finalboss();
+    setup_blas();
+    star_musicboss();
+}
 void reglas_juego::clear_scene()
 {
     duracion_nivel->stop();
@@ -135,38 +158,7 @@ void reglas_juego::enemigos_Collisi()
     }
 }
 
-void reglas_juego::nivel2()
-{
-    duracion_nivel->stop();
-    setup_scene(":/imagenes/fondo2.png");
-    clear_scene();
-    duracion_nivel2->start(5000);
-    setup_enemigo(":/imagenes/enemigo1.png",":/imagenes/enemigo2.png",0.5);
-    start_parabolic();
-    start_zigzag();
-    start_harmonic();
-    generate_map();
-    setup_blas();
-    start_pendulum();
-    star_music();
-}
-void reglas_juego::nivel3()
-{
 
-    duracion_nivel2->stop();
-    setup_scene(":/imagenes/fondo3.png");
-    clear_scene();
-    //duracion_nivel->start(40000);
-    setup_enemigo(":/imagenes/balajefe.png",":/imagenes/balajefe.png",0.25);
-    start_parabolic();
-    start_zigzag();
-    start_harmonic();
-    generate_map();
-    generate_finalboss();
-    setup_blas();
-    start_pendulum();
-    star_musicboss();
-}
 void reglas_juego::disparar()
 {
     if (puede_disparar) {
@@ -178,7 +170,7 @@ void reglas_juego::disparar()
         scene->addItem(disparos[disparos.length()-1]);
 
         puede_disparar = false;
-        disparo_timer->start(2000); // 2000 ms = 2 segundos
+        disparo_timer->start(2000);
     }
 }
 
@@ -248,16 +240,42 @@ void reglas_juego::setup_blas()
     scene->addItem(blas);
 }
 
-
-void reglas_juego::setup_enemigo(QString sprite,QString sprite2, float scale)
+void reglas_juego::setup_enemy_spawn(QString sprite, float scale, int interval, int tipo_movimiento)
 {
-    enemys.push_back(new enemigo(30,0,20 ,scale,sprite2));
-    enemys.push_back(new enemigo(150,0,20 ,scale,sprite));
-    enemys.push_back(new enemigo(190,0,20 ,scale,sprite2));
-    enemys.push_back(new enemigo(50,0,20 ,scale,sprite));
-
-    for(short i=0; i<enemys.length(); i++) scene->addItem(enemys[i]);
+    spawn_timer = new QTimer;
+    connect(spawn_timer, &QTimer::timeout, this, [this, sprite, scale, tipo_movimiento]() {
+        this->spawn_enemy(sprite, scale, tipo_movimiento);
+    });
+    spawn_timer->start(interval);
 }
+
+void reglas_juego::spawn_enemy(QString sprite, float scale, int tipo_movimiento)
+{
+    int random_x = 30 + rand() % (200);
+    int y = 0;
+    enemigo* new_enemy = new enemigo(random_x, y, 20, scale, sprite);
+    enemys.push_back(new_enemy);
+    scene->addItem(new_enemy);
+
+    switch (tipo_movimiento) {
+    case 1:
+        new_enemy->start_harmonic_movement(200, 1);
+        break;
+    case 2:
+        new_enemy->start_pendulum_motion(200, 10);
+        break;
+    case 3:
+        new_enemy->start_parabolic_movement();
+        break;
+    case 4:
+        new_enemy->start_zigzag_movement();
+        break;
+    default:
+        qDebug() << "Movimiento no válido";
+        break;
+    }
+}
+
 
 void reglas_juego::start_parabolic()
 {
@@ -285,6 +303,7 @@ void reglas_juego::star_music() {
     musicPlayer->setSource(QUrl("qrc:/imagenes/MUSICA EPICA PARA PIRATAS EPICOS.mp3"));
     musicPlayer->play();
 }
+
 
 void reglas_juego::star_musicboss() {
     if (musicPlayerboss->isPlaying()) {
