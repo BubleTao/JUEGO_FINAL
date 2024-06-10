@@ -18,6 +18,8 @@ reglas_juego::reglas_juego(QGraphicsView *graph)
     audioOutputboss = new QAudioOutput(this);
     musicPlayerboss->setAudioOutput(audioOutputboss);
 
+    score = 0; // Inicializamos la puntuación a 0
+    create_score_file(); // Crear el archivo de puntuación al inicio del juego
     load_level_1();
     muralla_vida = 1;
     //niveles
@@ -183,6 +185,8 @@ void reglas_juego::enemy_is_reached(QGraphicsItem *item, int enemy)
     enemys.remove(enemy);
     scene->removeItem(enemy_item);
     delete enemy_item;
+    score += 100;
+    update_score_file();
 
     // Crear la animación de muerte
 
@@ -312,4 +316,38 @@ void reglas_juego::star_musicboss() {
     audioOutputboss->setVolume(30);
     musicPlayerboss->setSource(QUrl("qrc:/imagenes/la-cancion-de-los-gigantes-dormidos-criaturas-mitologicas_kUk3HbNU.mp3"));
     musicPlayerboss->play();
+}
+
+void reglas_juego::create_score_file()
+{
+    std::ofstream score_file("score.txt");
+    if (score_file.is_open()) {
+        score_file << "Score: 0" << std::endl;
+        score_file.close();
+    }
+}
+
+void reglas_juego::update_score_file()
+{
+    std::ofstream score_file("score.txt");
+    if (score_file.is_open()) {
+        score_file << "Score: " << score << std::endl;
+        score_file.close();
+    }
+}
+
+int reglas_juego::read_score_from_file()
+{
+    std::ifstream score_file("score.txt");
+    int current_score = 0;
+    if (score_file.is_open()) {
+        std::string line;
+        while (std::getline(score_file, line)) {
+            if (line.find("Score: ") != std::string::npos) {
+                current_score = std::stoi(line.substr(7));
+            }
+        }
+        score_file.close();
+    }
+    return current_score;
 }

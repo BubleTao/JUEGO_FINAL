@@ -15,6 +15,7 @@
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <fstream>
 
 #include "personaje.h"
 #include "escenario.h"
@@ -69,6 +70,8 @@ private:
     QAudioOutput *audioOutput;
     QAudioOutput *audioOutputboss;
 
+    int score;
+
 
     void set_blas_keys();
     void generate_map();
@@ -88,8 +91,11 @@ private:
     void clear_scene();
     void habilitar_disparo();
 
+    // Métodos para manejo de archivos
+    void create_score_file();
+    void update_score_file();
+    int read_score_from_file();
+
 };
-
-
 
 #endif // REGLAS_JUEGO_H
